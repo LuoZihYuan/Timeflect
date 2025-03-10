@@ -3,7 +3,8 @@
  * @description Provider component for the combined subthemes.
  */
 
-import { ReactNode, useMemo } from "react";
+import type { ReactNode } from "react";
+import { useMemo } from "react";
 import { ColorThemeProvider } from "./subthemes/ColorThemeProvider";
 import { FontThemeProvider } from "./subthemes/FontThemeProvider";
 import { SpacingThemeProvider } from "./subthemes/SpacingThemeProvider";
@@ -46,7 +47,7 @@ export const ThemeProvider = ({
   );
 
   return (
-    <ThemeContext.Provider value={themeContextValue}>
+    <ThemeContext value={themeContextValue}>
       <ColorThemeProvider initialMode={initialColorMode}>
         <FontThemeProvider initialDeviceSize={initialDeviceSize}>
           <SpacingThemeProvider initialDeviceSize={initialDeviceSize}>
@@ -59,6 +60,6 @@ export const ThemeProvider = ({
           </SpacingThemeProvider>
         </FontThemeProvider>
       </ColorThemeProvider>
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 };
