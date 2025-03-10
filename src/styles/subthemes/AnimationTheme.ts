@@ -1,6 +1,6 @@
 /**
- * @file TimeflectAnimationSystem.tsx
- * @description Animation system for the Timeflect application.
+ * @file AnimationTheme.tsx
+ * @description Comprehensive animation theme.
  * Provides animation tokens through a context-based API.
  */
 

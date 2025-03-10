@@ -1,6 +1,6 @@
 /**
  * @file index.ts
- * @description Main entry point for the Timeflect design theme
+ * @description Main entry point for the theme
  */
 
 // Export theme providers and hooks

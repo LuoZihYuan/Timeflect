@@ -1,6 +1,6 @@
 /**
- * @file TimeflectAnimationProvider.tsx
- * @description Provider component for the Timeflect animation system.
+ * @file AnimationProvider.tsx
+ * @description Provider component for the animation theme.
  */
 
 import type { ReactNode } from "react";
@@ -85,7 +85,7 @@ export const AnimationThemeProvider = ({
   const injectKeyframes = useCallback(() => {
     if (typeof document === "undefined" || keyframesInjected) return;
 
-    const styleId = "timeflect-animation-keyframes";
+    const styleId = "animation-keyframes";
     // Check if already exists
     if (document.getElementById(styleId)) {
       setKeyframesInjected(true);
