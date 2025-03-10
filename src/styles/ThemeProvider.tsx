@@ -1,13 +1,13 @@
 /**
  * @file ThemeProvider.tsx
- * @description Provider component for the combined theme.
+ * @description Provider component for the combined subthemes.
  */
 
-import type { ReactNode } from "react";
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { ColorThemeProvider } from "./subthemes/ColorThemeProvider";
 import { FontThemeProvider } from "./subthemes/FontThemeProvider";
 import { SpacingThemeProvider } from "./subthemes/SpacingThemeProvider";
+import { AnimationThemeProvider } from "./subthemes/AnimationThemeProvider";
 import { ThemeContext } from "./Theme";
 
 /**
@@ -18,6 +18,10 @@ interface ThemeProviderProps {
   initialColorMode?: "light" | "dark";
   /** Initial device size */
   initialDeviceSize?: "sm" | "md" | "lg" | "xl";
+  /** Initial motion preference */
+  initialMotionPreference?: "full" | "reduced";
+  /** Whether to respect system motion preference */
+  respectSystemMotionPreference?: boolean;
   /** Child components */
   children: ReactNode;
 }
@@ -30,6 +34,8 @@ interface ThemeProviderProps {
 export const ThemeProvider = ({
   initialColorMode = "light",
   initialDeviceSize = "md",
+  initialMotionPreference = "full",
+  respectSystemMotionPreference = true,
   children,
 }: ThemeProviderProps) => {
   const themeContextValue = useMemo(
@@ -40,14 +46,19 @@ export const ThemeProvider = ({
   );
 
   return (
-    <ThemeContext value={themeContextValue}>
+    <ThemeContext.Provider value={themeContextValue}>
       <ColorThemeProvider initialMode={initialColorMode}>
         <FontThemeProvider initialDeviceSize={initialDeviceSize}>
           <SpacingThemeProvider initialDeviceSize={initialDeviceSize}>
-            {children}
+            <AnimationThemeProvider
+              initialMotionPreference={initialMotionPreference}
+              respectSystemPreference={respectSystemMotionPreference}
+            >
+              {children}
+            </AnimationThemeProvider>
           </SpacingThemeProvider>
         </FontThemeProvider>
       </ColorThemeProvider>
-    </ThemeContext>
+    </ThemeContext.Provider>
   );
 };
