@@ -129,9 +129,5 @@ export const TimeEntriesProvider: React.FC<TimeEntriesProviderProps> = ({
     [entries, loading, error, addEntry, deleteEntry, updateEntry]
   );
 
-  return (
-    <TimeEntriesContext.Provider value={value}>
-      {children}
-    </TimeEntriesContext.Provider>
-  );
+  return <TimeEntriesContext value={value}>{children}</TimeEntriesContext>;
 };

@@ -8,7 +8,7 @@ export const PomodoroTimer: React.FC = () => {
   const { addEntry } = useTimeEntries();
 
   // Phase durations in seconds
-  const TASK_DURATION = 1 * 60; // 25 minutes
+  const TASK_DURATION = 25 * 60; // 25 minutes
   const SHORT_BREAK_DURATION = 5 * 60; // 5 minutes
   const LONG_BREAK_DURATION = 15 * 60; // 15 minutes
 
