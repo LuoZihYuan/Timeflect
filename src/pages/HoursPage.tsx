@@ -1,6 +1,7 @@
 import { Tabs, Tab, Divider } from "@heroui/react";
 import { TimeEntriesProvider } from "../context/TimerEntriesProvider";
 import { NormalTimer } from "../components/timer";
+import { EntryTable } from "../components/time-entry";
 
 export const HoursPage: React.FC = () => {
   return (
@@ -15,6 +16,9 @@ export const HoursPage: React.FC = () => {
           </Tab>
         </Tabs>
         <Divider />
+        <div className="py-3 px-1">
+          <EntryTable />
+        </div>
       </div>
     </TimeEntriesProvider>
   );

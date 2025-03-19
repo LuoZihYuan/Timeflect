@@ -68,7 +68,7 @@ export const NormalTimer: React.FC = () => {
             label="Task"
             variant="underlined"
             value={task}
-            onChange={(e) => setTask(e.target.value)}
+            onValueChange={(value) => setTask(value)}
           />
           <div className="flex gap-3">
             <TimeInput
