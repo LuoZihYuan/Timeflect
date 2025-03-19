@@ -10,7 +10,7 @@ export const App = () => {
         <AppNavigation />
         <Routes>
           <Route path="/" Component={HoursPage} />
-          <Route path="/reports" />
+          {/* <Route path="/reports" /> */}
         </Routes>
       </div>
     </BrowserRouter>
