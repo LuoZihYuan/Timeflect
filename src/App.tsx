@@ -5,11 +5,13 @@ export const App = () => {
   return (
     <BrowserRouter>
       <AppHeader />
-      <AppNavigation />
-      <Routes>
-        <Route path="/" />
-        <Route path="/report" />
-      </Routes>
+      <div className="flex">
+        <AppNavigation />
+        <Routes>
+          <Route path="/" />
+          <Route path="/reports" />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 };

@@ -18,9 +18,10 @@ export const AppNavigationRow: React.FC<AppNavigationRowProps> = ({
   return (
     <Link to={link}>
       <Button
-        color={selected ? "primary" : "default"}
+        radius="none"
         startContent={icon}
-        className={`flex flex-row items-center gap-2 ${selected ? "text-sky-500" : ""}`}
+        isDisabled={selected}
+        className={`w-44 h-14 pl-8 flex justify-start text-current ${selected ? "" : "bg-foreground-100"}`}
       >
         {title}
       </Button>

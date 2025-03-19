@@ -8,7 +8,7 @@ export const AppHeader: React.FC = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex h-16 justify-between items-center bg-foreground-50">
+    <div className="flex h-16 justify-between items-center bg-foreground-100">
       <Link to="/" className="ml-8">
         <div className="flex justify-between items-center">
           <Logo className="h-10 w-auto" />
@@ -18,15 +18,15 @@ export const AppHeader: React.FC = () => {
         <Button
           isIconOnly
           radius="full"
-          className="relative flex size-10 justify-center items-center"
+          className="relative flex size-10 justify-center items-center bg-foreground-100"
           onPress={() => {
             setTheme(theme === "dark" ? "light" : "dark");
           }}
         >
           {theme === "dark" ? (
-            <HiOutlineMoon className="size-6 text-gray-500" />
+            <HiOutlineMoon className="size-6" />
           ) : (
-            <HiOutlineSun className="size-8 text-gray-500" />
+            <HiOutlineSun className="size-8" />
           )}
         </Button>
       </div>

@@ -1,4 +1,4 @@
-import { Card, CardBody } from "@heroui/react";
+// import { Card, CardBody } from "@heroui/react";
 import { AppNavigationRow } from "./AppNavigationRow";
 import { HiOutlineClock, HiOutlineChartPie } from "react-icons/hi2";
 import { useLocation } from "react-router";
@@ -15,18 +15,16 @@ export const AppNavigation: React.FC = () => {
     },
   ];
   return (
-    <Card className="min-h-screen w-fit py-8 bg-foreground-50">
-      <CardBody className="flex flex-col mx-8 gap-y-2 ">
-        {navContents.map(({ title, link, icon }) => (
-          <AppNavigationRow
-            key={`nav-${title}`}
-            title={title}
-            link={link}
-            icon={icon}
-            selected={location.pathname === link}
-          />
-        ))}
-      </CardBody>
-    </Card>
+    <div className="min-h-screen w-fit bg-foreground-100 flex flex-col pt-2">
+      {navContents.map(({ title, link, icon }) => (
+        <AppNavigationRow
+          key={`nav-${title}`}
+          title={title}
+          link={link}
+          icon={icon}
+          selected={location.pathname === link}
+        />
+      ))}
+    </div>
   );
 };
