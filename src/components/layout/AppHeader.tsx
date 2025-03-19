@@ -1,75 +1,34 @@
-import { useState } from "react";
-import { useTheme } from "../../styles";
+import { useTheme } from "@heroui/use-theme";
+import { Button } from "@heroui/react";
+import { Link } from "react-router";
 import Logo from "../../assets/logo+brand.svg?react";
-import IconDarkMode from "../../assets/layout/dark-mode.svg?react";
-import IconLightMode from "../../assets/layout/light-mode.svg?react";
+import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 
-export const AppHeader = () => {
-  const { color, spacing, animation } = useTheme();
-  const [isHovered, setIsHovered] = useState(false);
+export const AppHeader: React.FC = () => {
+  const { theme, setTheme } = useTheme();
 
-  const toggleMode = () => {
-    color.toggleColorMode();
-  };
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: spacing.toRem(spacing.spacing.scale[4]),
-      }}
-    >
-      <a href="/">
-        <div
-          style={{
-            height: spacing.toRem(48),
-            width: spacing.toRem(144),
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+    <div className="flex h-16 justify-between items-center bg-foreground-50">
+      <Link to="/" className="ml-8">
+        <div className="flex justify-between items-center">
+          <Logo className="h-10 w-auto" />
+        </div>
+      </Link>
+      <div className="flex mr-8 justify-center items-center">
+        <Button
+          isIconOnly
+          radius="full"
+          className="relative flex size-10 justify-center items-center"
+          onPress={() => {
+            setTheme(theme === "dark" ? "light" : "dark");
           }}
         >
-          <Logo
-            height={spacing.toRem(32)}
-            width={spacing.toRem(128)}
-            style={{ color: color.colors.text.primary }}
-          />
-        </div>
-      </a>
-      <div
-        style={{
-          width: spacing.toRem(48),
-          height: spacing.toRem(48),
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: isHovered
-            ? color.colors.background.secondary
-            : color.colors.background.primary,
-          borderRadius: spacing.spacing.radius.circle,
-          animation: animation.animation.transition.button,
-        }}
-        onClick={toggleMode}
-        onMouseOver={() => setIsHovered(true)}
-        onMouseOut={() => setIsHovered(false)}
-      >
-        {color.mode === "light" ? (
-          <IconDarkMode
-            width={spacing.toRem(32)}
-            height={spacing.toRem(32)}
-            style={{
-              color: color.colors.text.primary,
-            }}
-          />
-        ) : (
-          <IconLightMode
-            width={spacing.toRem(32)}
-            height={spacing.toRem(32)}
-            style={{
-              color: color.colors.text.primary,
-            }}
-          />
-        )}
+          {theme === "dark" ? (
+            <HiOutlineMoon className="size-6 text-gray-500" />
+          ) : (
+            <HiOutlineSun className="size-8 text-gray-500" />
+          )}
+        </Button>
       </div>
     </div>
   );
