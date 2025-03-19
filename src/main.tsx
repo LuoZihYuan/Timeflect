@@ -1,18 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeProvider } from "./styles/ThemeProvider.tsx";
+import { HeroUIProvider } from "@heroui/react";
 import { App } from "./App.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider
-      initialColorMode="dark"
-      initialDeviceSize="md"
-      initialMotionPreference="full"
-      respectSystemMotionPreference={true}
-    >
+    <HeroUIProvider>
       <App />
-    </ThemeProvider>
+    </HeroUIProvider>
   </StrictMode>
 );

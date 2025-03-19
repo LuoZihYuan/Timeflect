@@ -1,22 +1,15 @@
-import { useEffect } from "react";
-import { useColorTheme } from "./styles";
-import { AppHeader } from "./components/layout/AppHeader";
+import { AppHeader, AppNavigation } from "./components/layout";
+import { BrowserRouter, Routes, Route } from "react-router";
 
 export const App = () => {
-  const color = useColorTheme();
-  useEffect(() => {
-    document.body.style.backgroundColor = color.colors.background.primary;
-  }, [color.colors.background.primary, color.mode]);
   return (
-    <div
-      style={
-        {
-          height: "100%",
-          width: "100%",
-        } as React.CSSProperties
-      }
-    >
+    <BrowserRouter>
       <AppHeader />
-    </div>
+      <AppNavigation />
+      <Routes>
+        <Route path="/" />
+        <Route path="/report" />
+      </Routes>
+    </BrowserRouter>
   );
 };
