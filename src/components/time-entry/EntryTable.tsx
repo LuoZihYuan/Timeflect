@@ -50,7 +50,7 @@ export const EntryTable: React.FC = () => {
               editingEndTime.second
             ),
           };
-          updateEntry(updatedEntry);
+          void updateEntry(updatedEntry);
         }
       }
       // Clear the editing state
@@ -90,7 +90,7 @@ export const EntryTable: React.FC = () => {
               editingEndTime.second
             ),
           };
-          updateEntry(updatedEntry);
+          void updateEntry(updatedEntry);
         }
       }
       // Set the new selection and load its data into state.
@@ -128,7 +128,7 @@ export const EntryTable: React.FC = () => {
         </TableColumn>
       </TableHeader>
       <TableBody>
-        {entries.toReversed().map(({ key, task, startTime, endTime }) => (
+        {entries.map(({ key, task, startTime, endTime }) => (
           <TableRow key={key}>
             <TableCell>
               {selectedKey === key ? (

@@ -48,7 +48,7 @@ export const NormalTimer: React.FC = () => {
       startTime,
       endTime,
     };
-    addEntry(entry);
+    void addEntry(entry);
     setElapsedSeconds(0);
     setTask("");
     setStartTime(null);
