@@ -1,6 +1,6 @@
 import { Tabs, Tab, Divider } from "@heroui/react";
 import { TimeEntriesProvider } from "../context/TimerEntriesProvider";
-import { NormalTimer } from "../components/timer";
+import { NormalTimer, PomodoroTimer } from "../components/timer";
 import { EntryTable } from "../components/time-entry";
 
 export const HoursPage: React.FC = () => {
@@ -12,7 +12,7 @@ export const HoursPage: React.FC = () => {
             <NormalTimer />
           </Tab>
           <Tab key="timer-pomodoro" title="Pomodoro">
-            <NormalTimer />
+            <PomodoroTimer />
           </Tab>
         </Tabs>
         <Divider />
