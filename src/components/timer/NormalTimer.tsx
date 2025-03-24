@@ -16,7 +16,10 @@ export const NormalTimer: React.FC = () => {
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
-        setElapsedSeconds((prev) => prev + 1);
+        const currentTime = new Date();
+        setElapsedSeconds(
+          (currentTime.getTime() - startTime!.getTime()) / 1000
+        );
       }, 1000);
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -28,7 +31,7 @@ export const NormalTimer: React.FC = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning]);
+  }, [isRunning, startTime]);
 
   // Start the timer: reset elapsed seconds and record start time.
   const handleStart = () => {
