@@ -8,13 +8,15 @@ import {
   TableCell,
   TimeInput,
   Input,
+  Button,
 } from "@heroui/react";
 import { Time } from "@internationalized/date";
 import { useTimeEntries } from "../../context/TimeEntriesContext";
 import type { Selection } from "@heroui/react";
+import { HiOutlineTrash } from "react-icons/hi2";
 
 export const EntryTable: React.FC = () => {
-  const { entries, updateEntry } = useTimeEntries();
+  const { entries, updateEntry, deleteEntry } = useTimeEntries();
 
   // local state for the selected row and its editable fields
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
@@ -116,6 +118,10 @@ export const EntryTable: React.FC = () => {
     }
   };
 
+  const handleDelete = (key: string) => {
+    void deleteEntry(key);
+  };
+
   return (
     <Table selectionMode="single" onSelectionChange={handleSelectionChange}>
       <TableHeader>
@@ -125,6 +131,9 @@ export const EntryTable: React.FC = () => {
         </TableColumn>
         <TableColumn align="center" className="w-28">
           END
+        </TableColumn>
+        <TableColumn align="center" className="w-0">
+          {""}
         </TableColumn>
       </TableHeader>
       <TableBody>
@@ -182,6 +191,22 @@ export const EntryTable: React.FC = () => {
                 className="w-fit"
                 granularity="second"
               />
+            </TableCell>
+            <TableCell>
+              {selectedKey === key ? (
+                <Button
+                  isIconOnly
+                  radius="full"
+                  variant="light"
+                  onPress={() => {
+                    handleDelete(key);
+                  }}
+                >
+                  <HiOutlineTrash className="size-6" color="#f31260" />
+                </Button>
+              ) : (
+                ""
+              )}
             </TableCell>
           </TableRow>
         ))}
