@@ -1,7 +1,6 @@
-// import { Card, CardBody } from "@heroui/react";
 import { AppNavigationRow } from "./AppNavigationRow";
 import { HiOutlineClock } from "react-icons/hi2";
-// import {HiOutlineChartPie} from "react-icons/hi2";
+// import { HiOutlineChartPie } from "react-icons/hi2";
 import { useLocation } from "react-router";
 
 export const AppNavigation: React.FC = () => {
