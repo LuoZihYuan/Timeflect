@@ -6,10 +6,10 @@ import { useTimeEntries } from "../../context/TimeEntriesContext";
 
 export const NormalTimer: React.FC = () => {
   const { addEntry } = useTimeEntries();
-  const [task, setTask] = useState("");
-  const [isRunning, setIsRunning] = useState(false);
+  const [task, setTask] = useState<string>("");
+  const [isRunning, setIsRunning] = useState<boolean>(false);
   const [startTime, setStartTime] = useState<Date | null>(null);
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [elapsedSeconds, setElapsedSeconds] = useState<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Start or stop the interval based on isRunning
@@ -27,9 +27,7 @@ export const NormalTimer: React.FC = () => {
     }
     // Cleanup interval on unmount.
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [isRunning, startTime]);
 

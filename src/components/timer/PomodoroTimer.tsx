@@ -24,6 +24,7 @@ export const PomodoroTimer: React.FC = () => {
   const [currentPhase, setCurrentPhase] = useState<string>(PHASES.TASK);
   const [phaseCount, setPhaseCount] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(TASK_DURATION);
+  const [elapsedSeconds, setElapsedSeconds] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [startTime, setStartTime] = useState<Date | null>(null);
@@ -99,12 +100,28 @@ export const PomodoroTimer: React.FC = () => {
 
   // Pause the timer
   const pauseTimer = () => {
+    const endTime = new Date();
+    const entry = {
+      key: uuidv4(),
+      task,
+      startTime: startTime!,
+      endTime,
+    };
+    // Add entry for the task phase
+    void addEntry(entry);
+
+    setTimeLeft((prev) => prev - elapsedSeconds);
+
+    setStartTime(null);
+    setElapsedSeconds(0);
+
     setIsRunning(false);
     setIsPaused(true);
   };
 
   // Resume the timer
   const resumeTimer = () => {
+    setStartTime(new Date());
     setIsRunning(true);
     setIsPaused(false);
   };
@@ -112,19 +129,18 @@ export const PomodoroTimer: React.FC = () => {
   // End the current phase and move to the next
   const endPhase = useCallback(() => {
     const endTime = new Date();
+    const entry = {
+      key: uuidv4(),
+      task,
+      startTime: startTime!,
+      endTime,
+    };
 
     // Add entry for the task phase
-    if (currentPhase === PHASES.TASK) {
-      void addEntry({
-        key: uuidv4(),
-        task,
-        startTime: startTime!,
-        endTime,
-      });
+    void addEntry(entry);
 
-      // Update phase count if task phase completed
-      setPhaseCount((prev) => prev + 1);
-    }
+    // Update phase count if task phase completed
+    if (currentPhase === PHASES.TASK) setPhaseCount((prev) => prev + 1);
 
     // Determine the next phase
     const nextPhase = getNextPhase();
@@ -132,11 +148,13 @@ export const PomodoroTimer: React.FC = () => {
 
     // Reset timer for the next phase
     setTimeLeft(getPhaseDuration(nextPhase));
+    setTask("");
 
     // Reset timer state
     setIsRunning(false);
     setIsPaused(false);
     setStartTime(null);
+    setElapsedSeconds(0);
   }, [
     currentPhase,
     addEntry,
@@ -149,27 +167,34 @@ export const PomodoroTimer: React.FC = () => {
 
   // Timer effect
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | null;
+    let interval: ReturnType<typeof setInterval> | null = null;
 
-    if (isRunning && timeLeft > 0) {
+    if (isRunning && timeLeft > elapsedSeconds) {
       interval = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        const currentTime = new Date();
+        setElapsedSeconds(
+          (currentTime.getTime() - startTime!.getTime()) / 1000
+        );
       }, 1000);
-    } else if (isRunning && timeLeft <= 0) {
+    } else if (isRunning && timeLeft <= elapsedSeconds) {
       // Phase completed automatically
       endPhase();
+    } else if (interval) {
+      clearInterval(interval);
+      interval = null;
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isRunning, timeLeft, endPhase]);
+  }, [isRunning, timeLeft, endPhase, startTime, elapsedSeconds]);
 
   // Format time for TimeInput component
   const timeObject = () => {
-    const hours = 0;
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
+    const countdown = timeLeft - elapsedSeconds;
+    const hours = Math.floor(countdown / 3600);
+    const minutes = Math.floor((countdown % 3600) / 60);
+    const seconds = countdown % 60;
     return new Time(hours, minutes, seconds);
   };
 
@@ -177,20 +202,14 @@ export const PomodoroTimer: React.FC = () => {
   const getLabelText = () => {
     const currentPhaseName = getPhaseDisplayName(currentPhase);
     const nextPhaseName = getPhaseDisplayName(getNextPhase());
-    return `${currentPhaseName} (Next: ${nextPhaseName})`;
+    return `${currentPhaseName} (next: ${nextPhaseName})`;
   };
 
   // Render appropriate button based on timer state
   const renderButton = () => {
-    if (timeLeft <= 0) {
+    if (isRunning) {
       return (
-        <Button color="primary" onPress={endPhase}>
-          End
-        </Button>
-      );
-    } else if (isRunning) {
-      return (
-        <Button color="primary" onPress={pauseTimer}>
+        <Button color="secondary" onPress={pauseTimer}>
           Pause
         </Button>
       );
@@ -202,7 +221,7 @@ export const PomodoroTimer: React.FC = () => {
       );
     } else {
       return (
-        <Button color="primary" onPress={startTimer}>
+        <Button isDisabled={task === ""} color="primary" onPress={startTimer}>
           Start
         </Button>
       );
