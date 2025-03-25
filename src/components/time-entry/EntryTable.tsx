@@ -137,79 +137,81 @@ export const EntryTable: React.FC = () => {
         </TableColumn>
       </TableHeader>
       <TableBody>
-        {entries.map(({ key, task, startTime, endTime }) => (
-          <TableRow key={key}>
-            <TableCell>
-              {selectedKey === key ? (
-                <Input
-                  value={editingTask}
-                  onValueChange={(value) => setEditingTask(value)}
-                />
-              ) : (
-                task
-              )}
-            </TableCell>
-            <TableCell>
-              <TimeInput
-                // enable the input only when this row is selected
-                isDisabled={selectedKey !== key}
-                value={
-                  selectedKey === key && editingStartTime
-                    ? editingStartTime
-                    : new Time(
-                        startTime.getHours(),
-                        startTime.getMinutes(),
-                        startTime.getSeconds()
-                      )
-                }
-                onChange={(newTime) => {
-                  if (selectedKey === key) setEditingStartTime(newTime);
-                }}
-                hourCycle={24}
-                variant="flat"
-                className="w-fit"
-                granularity="second"
-              />
-            </TableCell>
-            <TableCell>
-              <TimeInput
-                isDisabled={selectedKey !== key}
-                value={
-                  selectedKey === key && editingEndTime
-                    ? editingEndTime
-                    : new Time(
-                        endTime.getHours(),
-                        endTime.getMinutes(),
-                        endTime.getSeconds()
-                      )
-                }
-                onChange={(newTime) => {
-                  if (selectedKey === key) setEditingEndTime(newTime);
-                }}
-                hourCycle={24}
-                variant="flat"
-                className="w-fit"
-                granularity="second"
-              />
-            </TableCell>
-            <TableCell>
-              {selectedKey === key ? (
-                <Button
-                  isIconOnly
-                  radius="full"
-                  variant="light"
-                  onPress={() => {
-                    handleDelete(key);
+        {entries
+          .toSorted((a, b) => b.startTime.getTime() - a.startTime.getTime())
+          .map(({ key, task, startTime, endTime }) => (
+            <TableRow key={key}>
+              <TableCell>
+                {selectedKey === key ? (
+                  <Input
+                    value={editingTask}
+                    onValueChange={(value) => setEditingTask(value)}
+                  />
+                ) : (
+                  task
+                )}
+              </TableCell>
+              <TableCell>
+                <TimeInput
+                  // enable the input only when this row is selected
+                  isDisabled={selectedKey !== key}
+                  value={
+                    selectedKey === key && editingStartTime
+                      ? editingStartTime
+                      : new Time(
+                          startTime.getHours(),
+                          startTime.getMinutes(),
+                          startTime.getSeconds()
+                        )
+                  }
+                  onChange={(newTime) => {
+                    if (selectedKey === key) setEditingStartTime(newTime);
                   }}
-                >
-                  <HiOutlineTrash className="size-6" color="#f31260" />
-                </Button>
-              ) : (
-                ""
-              )}
-            </TableCell>
-          </TableRow>
-        ))}
+                  hourCycle={24}
+                  variant="flat"
+                  className="w-fit"
+                  granularity="second"
+                />
+              </TableCell>
+              <TableCell>
+                <TimeInput
+                  isDisabled={selectedKey !== key}
+                  value={
+                    selectedKey === key && editingEndTime
+                      ? editingEndTime
+                      : new Time(
+                          endTime.getHours(),
+                          endTime.getMinutes(),
+                          endTime.getSeconds()
+                        )
+                  }
+                  onChange={(newTime) => {
+                    if (selectedKey === key) setEditingEndTime(newTime);
+                  }}
+                  hourCycle={24}
+                  variant="flat"
+                  className="w-fit"
+                  granularity="second"
+                />
+              </TableCell>
+              <TableCell>
+                {selectedKey === key ? (
+                  <Button
+                    isIconOnly
+                    radius="full"
+                    variant="light"
+                    onPress={() => {
+                      handleDelete(key);
+                    }}
+                  >
+                    <HiOutlineTrash className="size-6" color="#f31260" />
+                  </Button>
+                ) : (
+                  ""
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );
