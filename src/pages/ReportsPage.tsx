@@ -1,5 +1,5 @@
 import { Tabs, Tab } from "@heroui/react";
-import { PieChart } from "../components/chart/PieChart";
+import { PieChart } from "../components/chart";
 import { useTimeEntries } from "../context/TimeEntriesContext";
 
 interface Accumulator {

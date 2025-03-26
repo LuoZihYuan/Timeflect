@@ -7,12 +7,14 @@ import { TimeEntriesProvider } from "./context/TimerEntriesProvider";
 
 export const App = () => {
   const navigate = useNavigate();
-  const handleNavigate = (to: To, options?: NavigateOptions) => {
-    void navigate(to, options);
-  };
 
   return (
-    <HeroUIProvider navigate={handleNavigate} useHref={useHref}>
+    <HeroUIProvider
+      navigate={(to: To, options?: NavigateOptions) => {
+        void navigate(to, options);
+      }}
+      useHref={useHref}
+    >
       <AppHeader />
       <div className="flex">
         <AppNavigation />

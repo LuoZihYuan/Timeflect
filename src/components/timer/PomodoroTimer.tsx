@@ -4,20 +4,20 @@ import { Time } from "@internationalized/date";
 import { v4 as uuidv4 } from "uuid";
 import { useTimeEntries } from "../../context/TimeEntriesContext";
 
+// Phase durations in seconds
+const TASK_DURATION = 25 * 60; // 25 minutes
+const SHORT_BREAK_DURATION = 5 * 60; // 5 minutes
+const LONG_BREAK_DURATION = 15 * 60; // 15 minutes
+
+// Phase types
+const PHASES = {
+  TASK: "task",
+  SHORT_BREAK: "shortBreak",
+  LONG_BREAK: "longBreak",
+};
+
 export const PomodoroTimer: React.FC = () => {
   const { addEntry } = useTimeEntries();
-
-  // Phase durations in seconds
-  const TASK_DURATION = 25 * 60; // 25 minutes
-  const SHORT_BREAK_DURATION = 5 * 60; // 5 minutes
-  const LONG_BREAK_DURATION = 15 * 60; // 15 minutes
-
-  // Phase types
-  const PHASES = {
-    TASK: "task",
-    SHORT_BREAK: "shortBreak",
-    LONG_BREAK: "longBreak",
-  };
 
   // State variables
   const [task, setTask] = useState<string>("");
@@ -42,54 +42,35 @@ export const PomodoroTimer: React.FC = () => {
       // After any break, go to task
       return PHASES.TASK;
     }
-  }, [
-    currentPhase,
-    phaseCount,
-    PHASES.TASK,
-    PHASES.SHORT_BREAK,
-    PHASES.LONG_BREAK,
-  ]);
+  }, [currentPhase, phaseCount]);
 
   // Get phase display name
-  const getPhaseDisplayName = useCallback(
-    (phase: string) => {
-      switch (phase) {
-        case PHASES.TASK:
-          return "Task";
-        case PHASES.SHORT_BREAK:
-          return "Short Break";
-        case PHASES.LONG_BREAK:
-          return "Long Break";
-        default:
-          return "Task";
-      }
-    },
-    [PHASES.TASK, PHASES.SHORT_BREAK, PHASES.LONG_BREAK]
-  );
+  const getPhaseDisplayName = useCallback((phase: string) => {
+    switch (phase) {
+      case PHASES.TASK:
+        return "Task";
+      case PHASES.SHORT_BREAK:
+        return "Short Break";
+      case PHASES.LONG_BREAK:
+        return "Long Break";
+      default:
+        return "Task";
+    }
+  }, []);
 
   // Get phase duration in seconds
-  const getPhaseDuration = useCallback(
-    (phase: string) => {
-      switch (phase) {
-        case PHASES.TASK:
-          return TASK_DURATION;
-        case PHASES.SHORT_BREAK:
-          return SHORT_BREAK_DURATION;
-        case PHASES.LONG_BREAK:
-          return LONG_BREAK_DURATION;
-        default:
-          return TASK_DURATION;
-      }
-    },
-    [
-      TASK_DURATION,
-      SHORT_BREAK_DURATION,
-      LONG_BREAK_DURATION,
-      PHASES.TASK,
-      PHASES.SHORT_BREAK,
-      PHASES.LONG_BREAK,
-    ]
-  );
+  const getPhaseDuration = useCallback((phase: string) => {
+    switch (phase) {
+      case PHASES.TASK:
+        return TASK_DURATION;
+      case PHASES.SHORT_BREAK:
+        return SHORT_BREAK_DURATION;
+      case PHASES.LONG_BREAK:
+        return LONG_BREAK_DURATION;
+      default:
+        return TASK_DURATION;
+    }
+  }, []);
 
   // Start the timer
   const startTimer = () => {
@@ -155,15 +136,7 @@ export const PomodoroTimer: React.FC = () => {
     setIsPaused(false);
     setStartTime(null);
     setElapsedSeconds(0);
-  }, [
-    currentPhase,
-    addEntry,
-    task,
-    startTime,
-    getNextPhase,
-    getPhaseDuration,
-    PHASES.TASK,
-  ]);
+  }, [currentPhase, addEntry, task, startTime, getNextPhase, getPhaseDuration]);
 
   // Timer effect
   useEffect(() => {

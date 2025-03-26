@@ -14,6 +14,7 @@ export const AppNavigation: React.FC = () => {
       icon: <HiOutlineChartPie className="size-6" />,
     },
   ];
+
   return (
     <div className="min-h-screen w-fit bg-foreground-100 flex flex-col pt-2">
       {navContents.map(({ title, link, icon }) => (
