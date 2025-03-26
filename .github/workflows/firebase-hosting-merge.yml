@@ -21,6 +21,7 @@ jobs:
         run: |
           touch .env
           echo ${{ secrets.FIREBASE_CONFIG }} >> .env
+          cat .env
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
