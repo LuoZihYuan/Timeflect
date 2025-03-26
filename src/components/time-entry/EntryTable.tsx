@@ -14,6 +14,7 @@ import { Time } from "@internationalized/date";
 import { useTimeEntries } from "../../context/TimeEntriesContext";
 import type { Selection } from "@heroui/react";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { semanticColors } from "@heroui/react";
 
 export const EntryTable: React.FC = () => {
   const { entries, updateEntry, deleteEntry } = useTimeEntries();
@@ -204,7 +205,11 @@ export const EntryTable: React.FC = () => {
                       handleDelete(key);
                     }}
                   >
-                    <HiOutlineTrash className="size-6" color="#f31260" />
+                    <HiOutlineTrash
+                      className="size-6"
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+                      color={(semanticColors.dark.danger as any).DEFAULT}
+                    />
                   </Button>
                 ) : (
                   ""
