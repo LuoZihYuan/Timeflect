@@ -1,10 +1,17 @@
-# Timeflect
+# <img src="./assets/images/title_github.png">
 
-Timeflect is a sleek time management app that tracks and analyzes your daily habits to boost productivity.
+**Timeflect is a sleek time management app that tracks and analyzes your daily habits to boost productivity.**
 
 ## Try it out
 
 Visit [timeflect.web.app](https://timeflect.web.app/)
+
+## Building on your own
+1. Install [pnpm](https://pnpm.io/installation) and [Git LFS](https://git-lfs.com/) if you haven't.
+2. Clone this repostiory to your local computer.
+3. Open your preferred terminal and `cd` into the repository.
+4. Run `git lfs pull` to pull all contents from remote.
+5. Build with `pnpm init;pnpm run build;`.
 
 ## Screenshots
 
