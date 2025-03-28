@@ -6,7 +6,7 @@
 
 ### Try it out
 
-Visit [timeflect.web.app](https://timeflect.web.app/)
+- Visit [timeflect.web.app](https://timeflect.web.app/)
 
 ### Building on local machine
 
@@ -33,6 +33,9 @@ Visit [timeflect.web.app](https://timeflect.web.app/)
 
 - 📊 **Reports Page**  
   Visualize your productivity with daily and weekly insights.
+
+- 🌗 **Light & Dark Mode**  
+  Switch between light and dark themes to match your mood and environment.
 
 ## Screenshots
 
