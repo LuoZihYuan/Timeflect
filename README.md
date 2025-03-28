@@ -8,7 +8,7 @@
 
 - Visit [timeflect.web.app](https://timeflect.web.app/)
 
-#### Building on local machine
+#### Build from source
 
 1. Install [pnpm](https://pnpm.io/installation) and [Git LFS](https://git-lfs.com/).
 2. Clone this repostiory to your local computer.
