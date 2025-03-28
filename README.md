@@ -38,24 +38,22 @@ Visit [timeflect.web.app](https://timeflect.web.app/)
 
 ### Hours
 
-#### Timer
+- Time Tracker
 
-![timer](./assets/images/screenshot_hours_timer.png)
+  > ![timer](./assets/images/screenshot_hours_timer.png)
 
-#### Pomodoro Timer
+- Pomodoro Time Tracker
 
-![pomodoro Timer](./assets/images/screenshot_hours_pomodoro.png)
+  > ![pomodoro Timer](./assets/images/screenshot_hours_pomodoro.png)
 
-#### Time Entry Edit
-
-![time entry](./assets/images/screenshot_hours_time-entry.png)
+- Time Entry Edit
+  > ![time entry](./assets/images/screenshot_hours_time-entry.png)
 
 ### Reports
 
-#### Daily
+- Daily Report
 
-![daily reports](./assets/images/screenshot_reports_daily.png)
+  > ![daily reports](./assets/images/screenshot_reports_daily.png)
 
-#### Weekly
-
-![weekly reports](./assets/images/screenshot_reports_weekly.png)
+- Weekly Report
+  > ![weekly reports](./assets/images/screenshot_reports_weekly.png)
