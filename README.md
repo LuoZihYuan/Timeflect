@@ -4,11 +4,11 @@
 
 ## Usage
 
-### Try it out
+#### Try it out
 
 - Visit [timeflect.web.app](https://timeflect.web.app/)
 
-### Building on local machine
+#### Building on local machine
 
 1. Install [pnpm](https://pnpm.io/installation) and [Git LFS](https://git-lfs.com/).
 2. Clone this repostiory to your local computer.
