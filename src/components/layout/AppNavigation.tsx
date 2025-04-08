@@ -16,7 +16,7 @@ export const AppNavigation: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen w-fit bg-foreground-100 flex flex-col pt-2">
+    <div className="w-fit bg-foreground-100 flex flex-col pt-2">
       {navContents.map(({ title, link, icon }) => (
         <AppNavigationRow
           key={`nav-${title}`}

@@ -15,15 +15,17 @@ export const App = () => {
       }}
       useHref={useHref}
     >
-      <AppHeader />
-      <div className="flex">
-        <AppNavigation />
-        <TimeEntriesProvider>
-          <Routes>
-            <Route path="/" Component={HoursPage} />
-            <Route path="/reports" Component={ReportsPage} />
-          </Routes>
-        </TimeEntriesProvider>
+      <div className="flex flex-col h-screen">
+        <AppHeader />
+        <div className="flex grow">
+          <AppNavigation />
+          <TimeEntriesProvider>
+            <Routes>
+              <Route path="/" Component={HoursPage} />
+              <Route path="/reports" Component={ReportsPage} />
+            </Routes>
+          </TimeEntriesProvider>
+        </div>
       </div>
     </HeroUIProvider>
   );
